@@ -1,0 +1,5 @@
+static:静态资源
+unpackage:打包资源
+manifest.json 项目配置
+app.vue 
+uni.css 常用css 需要引用lang="css"
