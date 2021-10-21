@@ -484,3 +484,26 @@ uni-modal, uni-modal .uni-modal {
 .p-10 {
 	padding: 10rpx;
 }
+// 引入公共基础类
+@import "./common.scss";
+@import "./color.scss";
+
+// 非nvue的样式
+/* #ifndef APP-NVUE */
+@import "./style.vue.scss";
+/* #endif */
+
+// nvue的特有样式
+/* #ifdef APP-NVUE */
+@import "./style.nvue.scss";
+/* #endif */
+
+// 小程序特有的样式
+/* #ifdef MP */
+@import "./style.mp.scss";
+/* #endif */
+
+// H5特有的样式
+/* #ifdef H5 */
+@import "./style.h5.scss";
+/* #endif */

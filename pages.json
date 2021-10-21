@@ -1,63 +1,92 @@
 {
 	"easycom": {
-			"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
-		},
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/index/index",
+			"path": "pages/A06account/login/pwd-login",
+			"style": {
+				"navigationBarTextStyle": "black",
+				"navigationBarTitleText": "登录",
+				"navigationBarBackgroundColor": "#ffffff"
+			}
+		},
+		{
+			"path": "pages/A06account/login/sms-login",
+			"style": {
+				"navigationBarTextStyle": "black",
+				"navigationBarTitleText": "登录",
+				"navigationBarBackgroundColor": "#ffffff"
+			}
+		},{
+			"path": "pages/A06account/register/userName-register",
+			"style": {
+				"navigationBarTextStyle": "black",
+				"navigationBarTitleText": "注册",
+				"navigationBarBackgroundColor": "#ffffff"
+			}
+		},{
+			"path": "pages/A06account/findPassword/email-findPassword",
+			"style": {
+				"navigationBarTextStyle": "black",
+				"navigationBarTitleText": "找回密码",
+				"navigationBarBackgroundColor": "#ffffff"
+			}
+		},{
+			"path": "pages/A06account/findPassword/findPassword",
+			"style": {
+				"navigationBarTextStyle": "black",
+				"navigationBarTitleText": "找回密码",
+				"navigationBarBackgroundColor": "#ffffff"
+			}
+		},{
+			"path": "pages/A06account/findPassword/mobile-findPassword",
+			"style": {
+				"navigationBarTextStyle": "black",
+				"navigationBarTitleText": "找回密码",
+				"navigationBarBackgroundColor": "#ffffff"
+			}
+		},
+		{
+			"path": "pages/A01home/index",
 			"style": {
 				"navigationBarTitleText": "智能云WMS系统"
 			}
-		}, {
-			"path": "pages/inventoryManagement/inventoryManagement",
+		},  {
+			"path": "pages/A02basedataM/index",
 			"style": {
 				"navigationBarTitleText": "智能云WMS系统",
 				"enablePullDownRefresh": true
 			}
 		}, {
-			"path": "pages/baseDataManagement/baseDataManagement",
-			"style": {
-				"navigationBarTitleText": "智能云WMS系统",
-				"enablePullDownRefresh": true
-			}
-		}, {
-			"path": "pages/warehouseManagement/warehouseManagement",
-			"style": {
-				"navigationBarTitleText": "智能云WMS系统",
-				"enablePullDownRefresh": true
-			}
-		}, {
-			"path": "pages/mine/mine",
+			"path": "pages/A02basedataM/WHInfo",
 			"style": {
 				"enablePullDownRefresh": true,
-				//禁用导航栏
-				"app-plus":{
-					"titleNView":false
-				},
+				"navigationBarTitleText": "仓库信息"
+			}
+
+		},{
+			"path": "pages/A03inventoryM/index",
+			"style": {
+				"navigationBarTitleText": "智能云WMS系统",
+				"enablePullDownRefresh": true
+			}
+		},{
+			"path": "pages/A04warehouseM/index",
+			"style": {
+				"navigationBarTitleText": "智能云WMS系统",
+				"enablePullDownRefresh": true
+			}
+		}, {
+			"path": "pages/A05mine/index",
+			"style": {
+				"enablePullDownRefresh": true,
+
 				"navigationBarTextStyle": "white",
-				"navigationBarTitleText": "我的",
-				"navigationBarBackgroundColor": "#ffd655"
+				"navigationBarTitleText": "我的"
 			}
 		}
-	    ,{
-            "path" : "pages/mine/mine",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/auth/login",
-            "style" :                                                                                    
-            {
-               "navigationBarTextStyle": "black",
-               "navigationBarTitleText": "登录",
-               "navigationBarBackgroundColor": "#ffffff"
-            }
-        }
-    ],
+	],
 	"globalStyle": {
 		//导航栏标题颜色 由于微信小程序的规范只支持黑色和白色  black/white
 		"navigationBarTextStyle": "white",
@@ -70,33 +99,33 @@
 		"selectedColor": "#515151",
 		"backgroundColor": "#ffffff",
 		"list": [{
-				"pagePath": "pages/index/index",
+				"pagePath": "pages/A01home/index",
 				"text": "首页",
 				"iconPath": "static/images/tabBar/home.png",
-				"selectedIconPath":"static/images/tabBar/home-fill.png"
+				"selectedIconPath": "static/images/tabBar/home-fill.png"
 			},
 			{
-				"pagePath": "pages/baseDataManagement/baseDataManagement",
+				"pagePath": "pages/A02basedataM/index",
 				"text": "基础数据管理",
 				"iconPath": "static/images/tabBar/all.png",
-				"selectedIconPath":"static/images/tabBar/all-fill.png"
+				"selectedIconPath": "static/images/tabBar/all-fill.png"
 			},
 			{
-				"pagePath": "pages/inventoryManagement/inventoryManagement",
+				"pagePath": "pages/A03inventoryM/index",
 				"text": "入库管理",
-				"iconPath": "static/images/tabBar/warehouse.png" ,
-				"selectedIconPath":"static/images/tabBar/warehouse-fill.png"
+				"iconPath": "static/images/tabBar/warehouse.png",
+				"selectedIconPath": "static/images/tabBar/warehouse-fill.png"
 			}, {
-				"pagePath": "pages/warehouseManagement/warehouseManagement",
+				"pagePath": "pages/A04warehouseM/index",
 				"text": "库存管理",
 				"iconPath": "static/images/tabBar/manage-order.png",
-				"selectedIconPath":"static/images/tabBar/manage-order-fill.png"
+				"selectedIconPath": "static/images/tabBar/manage-order-fill.png"
 			},
 			{
-				"pagePath": "pages/mine/mine",
+				"pagePath": "pages/A05mine/index",
 				"text": "我的",
 				"iconPath": "static/images/tabBar/mine.png",
-				"selectedIconPath":"static/images/tabBar/mine-fill.png"
+				"selectedIconPath": "static/images/tabBar/mine-fill.png"
 			}
 		]
 	}

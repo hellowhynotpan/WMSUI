@@ -1,29 +1,48 @@
+import Vue from 'vue'
 import App from './App'
-import uView from "uview-ui";
+Vue.config.productionTip = false
+
+App.mpType = 'app'
+
+// 引入全局uView
+import uView from 'uview-ui'
 Vue.use(uView);
 
-// #ifndef VUE3
-import Vue from 'vue'
-Vue.config.productionTip = false
-App.mpType = 'app'
-const app = new Vue({
-    ...App
-})
+import routerLink from './node_modules/uni-simple-router/component/router-link.vue'
+Vue.component('router-link',routerLink)
 
-// http拦截器，此为需要加入的内容，如果不是写在common目录，请自行修改引入路径
-import httpInterceptor from '@/common/http.interceptor.js'
-// 这里需要写在最后，是为了等Vue创建对象完成，引入"app"对象(也即页面的"this"实例)
+// vuex
+import store from '@/store'
+
+// 引入uView提供的对vuex的简写法文件
+let vuexStore = require('@/store/$u.mixin.js')
+Vue.mixin(vuexStore)
+
+// 将store放入Vue对象创建中
+const app = new Vue({
+	store,
+	...App
+})
+// http拦截器，将此部分放在new Vue()和app.$mount()之间，才能App.vue中正常使用
+import httpInterceptor from '@/common/js/http.interceptor.js'
 Vue.use(httpInterceptor, app)
 
-app.$mount()
+// http接口API集中管理引入部分
+import httpApi from '@/common/js/http.api.js'
+Vue.use(httpApi, app)
+// 路由
+import router from './router'
+import {
+	RouterMount
+} from 'uni-simple-router'
+
+//v1.3.5起 H5端 你应该去除原有的app.$mount();使用路由自带的渲染方式
+// #ifdef H5
+RouterMount(app, '#app');
 // #endif
 
-// #ifdef VUE3
-import { createSSRApp } from 'vue'
-export function createApp() {
-  const app = createSSRApp(App)
-  return {
-    app
-  }
-}
+// #ifndef H5
+app.$mount(); //为了兼容小程序及app端必须这样写才有效果
 // #endif
+
+//app.$mount()
