@@ -6,15 +6,15 @@
 const install = (Vue, vm) => {
 	// 此为自定义配置参数，具体参数见上方说明
 	Vue.prototype.$u.http.setConfig({
-		/* baseUrl: 'http://47.103.96.47:8081/api', */
-		baseUrl: 'http://localhost:13631/api',
+		baseUrl: 'http://47.103.96.47:8081/api',
+		//baseUrl: 'http://localhost:13631/api',
+		//baseUrl: 'http://192.168.0.136:8000/api',
 		loadingText: '努力加载中~',
 		loadingTime: 800,
 		// 设置自定义头部content-type
 		// header: {
 		// 	'content-type': 'xxx'
-		// }
-		// ......
+		// }.
 	});
 	
 	// 请求拦截部分，如配置，每次请求前都会执行
@@ -34,7 +34,8 @@ const install = (Vue, vm) => {
 		// 所以哪怕您重新登录修改了Storage，下一次的请求将会是最新值
 		// const token = uni.getStorageSync('token');
 		// config.header.token = token;
-		config.header.Authorization="Bearer "+vm.accessToken
+		const token= vm.vuex_token
+		config.header.Authorization="Bearer "+token
 		
 		// 可以对某个url进行特别处理，此url参数为this.$u.get(url)中的url值
 		if(config.url == 'Authoize/login') config.header.noToken = true;

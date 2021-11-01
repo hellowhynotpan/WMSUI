@@ -17,7 +17,9 @@
             "delay" : 0
         },
         /* 模块配置 */
-        "modules" : {},
+        "modules" : {
+            "OAuth" : {}
+        },
         /* 应用发布信息 */
         "distribute" : {
             /* android打包配置 */
@@ -86,6 +88,22 @@
                         "spotlight@2x" : "unpackage/res/icons/80x80.png",
                         "spotlight@3x" : "unpackage/res/icons/120x120.png"
                     }
+                }
+            }
+        },
+        "nativePlugins" : {
+            "PP-BaiduFaceV2" : {
+                "__plugin_info__" : {
+                    "name" : "【特价68】人脸采集插件  最新百度SDK 离线人脸采集、活体检测 支持口罩模式",
+                    "description" : "【限时特价68】人脸采集插件2.0正式发布 双端百度人脸采集、活体检测 口罩模式 原图返回",
+                    "platforms" : "Android,iOS",
+                    "url" : "https://ext.dcloud.net.cn/plugin?id=3487",
+                    "android_package_name" : "imccoy.wms",
+                    "ios_bundle_id" : "",
+                    "isCloud" : true,
+                    "bought" : 1,
+                    "pid" : "3487",
+                    "parameters" : {}
                 }
             }
         }

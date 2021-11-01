@@ -4,11 +4,25 @@
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
+			"path": "pages/A06account/login/login",
+			"style": {
+				// "navigationBarTextStyle": "black",
+				// "navigationBarTitleText": "登录",
+				// "navigationBarBackgroundColor": "#ffffff"
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},
+		{
 			"path": "pages/A06account/login/pwd-login",
 			"style": {
-				"navigationBarTextStyle": "black",
-				"navigationBarTitleText": "登录",
-				"navigationBarBackgroundColor": "#ffffff"
+				// "navigationBarTextStyle": "black",
+				// "navigationBarTitleText": "登录",
+				// "navigationBarBackgroundColor": "#ffffff"
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		},
 		{
@@ -18,6 +32,25 @@
 				"navigationBarTitleText": "登录",
 				"navigationBarBackgroundColor": "#ffffff"
 			}
+		},
+
+		{
+			"path": "pages/A06account/login/sms-login",
+			"style": {
+				"navigationBarTextStyle": "black",
+				"navigationBarTitleText": "登录",
+				"navigationBarBackgroundColor": "#ffffff"
+			}
+		}, {
+			"path": "pages/A06account/login/face-login",
+			"style": {
+				// "navigationBarTextStyle": "black",
+				// "navigationBarTitleText": "登录",
+				// "navigationBarBackgroundColor": "#ffffff"
+				"app-plus": {
+					"titleNView": false
+				}
+			}
 		},{
 			"path": "pages/A06account/register/userName-register",
 			"style": {
@@ -25,21 +58,21 @@
 				"navigationBarTitleText": "注册",
 				"navigationBarBackgroundColor": "#ffffff"
 			}
-		},{
+		}, {
 			"path": "pages/A06account/findPassword/email-findPassword",
 			"style": {
 				"navigationBarTextStyle": "black",
 				"navigationBarTitleText": "找回密码",
 				"navigationBarBackgroundColor": "#ffffff"
 			}
-		},{
+		}, {
 			"path": "pages/A06account/findPassword/findPassword",
 			"style": {
 				"navigationBarTextStyle": "black",
 				"navigationBarTitleText": "找回密码",
 				"navigationBarBackgroundColor": "#ffffff"
 			}
-		},{
+		}, {
 			"path": "pages/A06account/findPassword/mobile-findPassword",
 			"style": {
 				"navigationBarTextStyle": "black",
@@ -50,32 +83,38 @@
 		{
 			"path": "pages/A01home/index",
 			"style": {
-				"navigationBarTitleText": "智能云WMS系统"
-			}
-		},  {
-			"path": "pages/A02basedataM/index",
-			"style": {
-				"navigationBarTitleText": "智能云WMS系统",
-				"enablePullDownRefresh": true
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		}, {
-			"path": "pages/A02basedataM/WHInfo",
+			"path": "pages/A02basedataM/index",
 			"style": {
-				"enablePullDownRefresh": true,
-				"navigationBarTitleText": "仓库信息"
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		}, {
+			"path": "pages/A02basedataM/whInfo",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 
-		},{
+		}, {
 			"path": "pages/A03inventoryM/index",
 			"style": {
-				"navigationBarTitleText": "智能云WMS系统",
-				"enablePullDownRefresh": true
+				"app-plus": {
+					"titleNView": false
+				}
 			}
-		},{
+		}, {
 			"path": "pages/A04warehouseM/index",
 			"style": {
-				"navigationBarTitleText": "智能云WMS系统",
-				"enablePullDownRefresh": true
+				"app-plus": {
+					"titleNView": false
+				}
 			}
 		}, {
 			"path": "pages/A05mine/index",
@@ -85,14 +124,38 @@
 				"navigationBarTextStyle": "white",
 				"navigationBarTitleText": "我的"
 			}
+		},
+		{
+			"path": "pages/A05mine/mineInfo",
+			"style": {
+				"navigationBarTextStyle": "black",
+				"navigationBarTitleText": "个人信息",
+				"navigationBarBackgroundColor": "#ffffff"
+			}
+		},
+		{
+			"path": "pages/A05mine/faceInfo",
+			"style": {
+				"navigationBarTextStyle": "black",
+				"navigationBarTitleText": "人脸信息修改",
+				"navigationBarBackgroundColor": "#ffffff"
+			}
+		},
+		{
+			"path": "pages/A05mine/setting",
+			"style": {
+				"navigationBarTextStyle": "black",
+				"navigationBarTitleText": "系统设置",
+				"navigationBarBackgroundColor": "#ffffff"
+			}
 		}
 	],
 	"globalStyle": {
 		//导航栏标题颜色 由于微信小程序的规范只支持黑色和白色  black/white
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "智能云WMS系统",
-		"navigationBarBackgroundColor": "#d81e06",
-		"backgroundColor": "#F8F8F8"
+		"navigationBarBackgroundColor": "#0067be",
+		"backgroundColor": "#0067be"
 	},
 	"tabBar": {
 		"color": "#bfbfbf",
@@ -106,7 +169,7 @@
 			},
 			{
 				"pagePath": "pages/A02basedataM/index",
-				"text": "基础数据管理",
+				"text": "基础管理",
 				"iconPath": "static/images/tabBar/all.png",
 				"selectedIconPath": "static/images/tabBar/all-fill.png"
 			},
@@ -126,6 +189,16 @@
 				"text": "我的",
 				"iconPath": "static/images/tabBar/mine.png",
 				"selectedIconPath": "static/images/tabBar/mine-fill.png"
+			}
+		]
+	},
+	"condition" : { //模式配置，仅开发期间生效
+		"current": 0, //当前激活的模式(list 的索引项)
+		"list": [
+			{
+				"name": "", //模式名称
+				"path": "", //启动页面，必选
+				"query": "" //启动参数，在页面的onLoad函数里面得到
 			}
 		]
 	}

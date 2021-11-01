@@ -43,12 +43,14 @@ router.beforeEach((to, from, next) => {
 		next({
 			name: LOGIN_PAGE_NAME[0] // 跳转到登录页
 		})
-	} else if (hasLogin && LOGIN_PAGE_NAME.indexOf(to.name) !== -1) { // 已登录，要跳转的页面，是登录页
-		// console.log('已登录，要跳转的页面，是登录页')
-		next({
-			name: 'index' // 跳转到首页
-		})
-	} else { // 其它
+	} 
+	// else if (hasLogin && LOGIN_PAGE_NAME.indexOf(to.name) !== -1) { // 已登录，要跳转的页面，是登录页
+	// 	// console.log('已登录，要跳转的页面，是登录页')
+	// 	next({
+	// 		name: 'index' // 跳转到首页
+	// 	})
+	// } 
+	else { // 其它
 	 //   console.log(to.name)
 		// console.log('正常')
 		//return

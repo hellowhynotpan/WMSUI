@@ -3,3 +3,11 @@ unpackage:打包资源
 manifest.json 项目配置
 app.vue 
 uni.css 常用css 需要引用lang="css"
+签名证书：06838cc840093b9d4689fc419ba1a3f3
+签名证书MD5:BE0A6F932AA58B387737FAED8EA3EBC4
+密钥库口令：imccoy
+证书： keytool -genkey -alias mytest -keyalg RSA -keysize 2048 -validity 36500 -keystore mytest.keystore  
+-alias mytest 表示证书的别名是mytest（别名建议使用英文字母和数字）；
+-keyalg RSA 表示采用的RSA算法；
+-validity 36500 表示证书的有效期是36500 天。
+-keystore mytest.keystore 表示生成的证书，可以加上路径
