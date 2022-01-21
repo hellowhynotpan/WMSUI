@@ -28,7 +28,7 @@
 				PPFace.checkRequestPermissions(res => {
 					if(res.code==200)
 					{
-						this.$u.toast('获取摄像头权限成功');
+						
 					}
 					else{
 						this.$u.toast('获取摄像头权限失败');

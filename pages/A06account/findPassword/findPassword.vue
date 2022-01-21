@@ -28,17 +28,12 @@
 export default {
 	data() {
 		return {
-			title: '找回密码',
+			title: '修改密码',
 			cells: [
 				{
-					title: '通过邮箱找回密码',
+					title: '通过手机修改密码',
 					value: '',
 					path: 'findPassword/email-findPassword'
-				},
-				{
-					title: '通过手机号找回密码',
-					value: '',
-					path: 'findPassword/mobile-findPassword'
 				}
 			]
 		};

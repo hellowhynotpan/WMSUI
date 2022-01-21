@@ -4,17 +4,6 @@
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/A06account/login/login",
-			"style": {
-				// "navigationBarTextStyle": "black",
-				// "navigationBarTitleText": "登录",
-				// "navigationBarBackgroundColor": "#ffffff"
-				"app-plus": {
-					"titleNView": false
-				}
-			}
-		},
-		{
 			"path": "pages/A06account/login/pwd-login",
 			"style": {
 				// "navigationBarTextStyle": "black",
@@ -51,7 +40,7 @@
 					"titleNView": false
 				}
 			}
-		},{
+		}, {
 			"path": "pages/A06account/register/userName-register",
 			"style": {
 				"navigationBarTextStyle": "black",
@@ -76,7 +65,7 @@
 			"path": "pages/A06account/findPassword/mobile-findPassword",
 			"style": {
 				"navigationBarTextStyle": "black",
-				"navigationBarTitleText": "找回密码",
+				"navigationBarTitleText": "修改密码",
 				"navigationBarBackgroundColor": "#ffffff"
 			}
 		},
@@ -97,26 +86,171 @@
 		}, {
 			"path": "pages/A02basedataM/whInfo",
 			"style": {
+				"navigationBarTitleText": "仓库信息",
+				"navigationBarBackgroundColor": "#0067be",
+				"backgroundColor": "#0067be",
 				"app-plus": {
-					"titleNView": false
+					"titleNView": {
+						"buttons": [{
+							"text": "... ",
+							"fontSize": "18px"
+						}]
+					}
 				}
 			}
 
 		}, {
+			"path": "pages/A02basedataM/csInfo",
+			"style": {
+				"navigationBarTitleText": "储位信息",
+				"navigationBarBackgroundColor": "#0067be",
+				"backgroundColor": "#0067be",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"text": "... ",
+							"fontSize": "18px"
+						}]
+					}
+				}
+			}
+
+		}, {
+			"path": "pages/A02basedataM/partInfo",
+			"style": {
+				"navigationBarTitleText": "物料信息",
+				"navigationBarBackgroundColor": "#0067be",
+				"backgroundColor": "#0067be",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"text": "... ",
+							"fontSize": "18px"
+						}]
+					}
+				}
+			}
+
+		}, {
+			"path": "pages/A02basedataM/editWh",
+			"style": {
+				"navigationBarTitleText": "仓库详情",
+				"navigationBarBackgroundColor": "#0067be",
+				"backgroundColor": "#0067be"
+			}
+
+		}, {
+			"path": "pages/A02basedataM/editPart",
+			"style": {
+				"navigationBarTitleText": "物料详情",
+				"navigationBarBackgroundColor": "#0067be",
+				"backgroundColor": "#0067be"
+			}
+
+		}, {
+			"path": "pages/A02basedataM/editCs",
+			"style": {
+				"navigationBarTitleText": "储位详情",
+				"navigationBarBackgroundColor": "#0067be",
+				"backgroundColor": "#0067be"
+			}
+
+		}, {
+			"path": "pages/A02basedataM/add",
+			"style": {
+				"navigationBarTitleText": "新增基础信息",
+				"navigationBarBackgroundColor": "#0067be",
+				"backgroundColor": "#0067be"
+			}
+
+		}, {
+			"path": "pages/A03inventoryM/inBillInfo",
+			"style": {
+				"navigationBarTitleText": "入库单",
+				"navigationBarBackgroundColor": "#0067be",
+				"backgroundColor": "#0067be",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"text": "... ",
+							"fontSize": "18px"
+						}]
+					}
+				}
+			}
+		}, {
+			"path": "pages/A03inventoryM/addInbill",
+			"style": {
+				"navigationBarTitleText": "新增入库单",
+				"navigationBarBackgroundColor": "#0067be",
+				"backgroundColor": "#0067be"
+			}
+
+		},{
+			"path": "pages/A03inventoryM/addDetailed",
+			"style": {
+				"navigationBarTitleText": "新增明细",
+				"navigationBarBackgroundColor": "#0067be",
+				"backgroundColor": "#0067be"
+			}
+
+		},
+		{
+			"path": "pages/A03inventoryM/editInbill",
+			"style": {
+				"navigationBarTitleText": "入库单详情",
+				"navigationBarBackgroundColor": "#0067be",
+				"backgroundColor": "#0067be"
+			}
+		
+		},
+		{
+			"path": "pages/A03inventoryM/editDetailed",
+			"style": {
+				"navigationBarTitleText": "明细详情",
+				"navigationBarBackgroundColor": "#0067be",
+				"backgroundColor": "#0067be"
+			}
+		
+		}
+		,{
 			"path": "pages/A03inventoryM/index",
 			"style": {
 				"app-plus": {
 					"titleNView": false
 				}
 			}
-		}, {
+		},
+		{
+			"path": "pages/A07exwarehouseM/index",
+			"style": {
+				"app-plus": {
+					"titleNView": false
+				}
+			}
+		},{
 			"path": "pages/A04warehouseM/index",
 			"style": {
 				"app-plus": {
 					"titleNView": false
 				}
 			}
-		}, {
+		},{
+			"path": "pages/A04warehouseM/stockM",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "库存查询"
+			}
+		}, 
+		{
+			"path": "pages/A04warehouseM/stockD",
+			"style": {
+				"enablePullDownRefresh": true,
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "库存明细"
+			}
+		},{
 			"path": "pages/A05mine/index",
 			"style": {
 				"enablePullDownRefresh": true,
@@ -178,6 +312,11 @@
 				"text": "入库管理",
 				"iconPath": "static/images/tabBar/warehouse.png",
 				"selectedIconPath": "static/images/tabBar/warehouse-fill.png"
+			},{
+				"pagePath": "pages/A07exwarehouseM/index",
+				"text": "出库管理",
+				"iconPath": "static/images/tabBar/exwh.png",
+				"selectedIconPath": "static/images/tabBar/exwh-fill.png"
 			}, {
 				"pagePath": "pages/A04warehouseM/index",
 				"text": "库存管理",
@@ -192,14 +331,12 @@
 			}
 		]
 	},
-	"condition" : { //模式配置，仅开发期间生效
+	"condition": { //模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式(list 的索引项)
-		"list": [
-			{
-				"name": "", //模式名称
-				"path": "", //启动页面，必选
-				"query": "" //启动参数，在页面的onLoad函数里面得到
-			}
-		]
+		"list": [{
+			"name": "", //模式名称
+			"path": "", //启动页面，必选
+			"query": "" //启动参数，在页面的onLoad函数里面得到
+		}]
 	}
 }

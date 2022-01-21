@@ -14,15 +14,10 @@
 						<u-button slot="right" type="success" size="mini" @click="getCode">{{ codeTips }}</u-button>
 					</u-form-item>
 				</u-form>
-
 				<u-verification-code seconds="60" ref="uCode" @change="codeChange"></u-verification-code>
-
 				<u-gap height="40"></u-gap>
-
 				<u-button :disabled="form.button.loading" type="primary" @click="submit">登 录</u-button>
-
 				<u-gap height="40"></u-gap>
-
 				<view class="u-flex">
 					<view class="u-flex-1 u-text-left" @click="openPage('login/pwd-login')">密码登录</view>
 					<view class="u-flex-1 u-text-right" @click="openPage('register/userName-register')">注册</view>

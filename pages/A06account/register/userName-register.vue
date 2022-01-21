@@ -5,15 +5,13 @@
 		</view>
 		<view class="page-body">
 			<view class="form-box">
-				<u-form :model="model" ref="uForm" label-position="top">
+				<u-form :model="model" ref="uForm" label-width="160rpx">
 					<u-form-item class="form-item" label="用户名" prop="account">
 						<u-input v-model="model.account" placeholder="4-20位的数字和字母" type="text" />
 					</u-form-item>
 					<u-form-item class="form-item" label="姓名" prop="realName">
 						<u-input v-model="model.realName" placeholder="请输入姓名" type="text" />
-
 					</u-form-item>
-
 					<u-form-item class="form-item" label="性别" prop="gender">
 						<u-input type="select" :select-open="actionSheetShow" v-model="model.gender" placeholder="请选择性别"
 							@click="actionSheetShow = true" />
@@ -32,21 +30,14 @@
 						<u-button slot="right" type="success" size="mini" @click="getCode">{{ codeTips }}</u-button>
 					</u-form-item>
 				</u-form>
-
 				<u-verification-code seconds="60" ref="uCode" @change="codeChange"></u-verification-code>
-
 				<u-gap height="40"></u-gap>
-
 				<u-button :disabled="form.button.loading" type="primary" @click="submit">立即提交</u-button>
-
 				<u-gap height="40"></u-gap>
-
 				<view class="u-flex u-row-between">
-					<!-- <view @click="openPage('register/mobile-register')">手机号注册</view> -->
-					<view @click="openPage('login/pwd-login')">登录</view>
+					<view @click="openPage('login/pwd-login')">账号密码登录</view>
 				</view>
 			</view>
-
 			<u-gap height="60"></u-gap>
 			<u-action-sheet :list="list" v-model="actionSheetShow" @click="actionSheetCallback"></u-action-sheet>
 		</view>
@@ -117,7 +108,7 @@
 						{
 							required: true,
 							message: '请选择性别',
-							trigger: 'change'
+							trigger: 'blur' ,
 						},
 					],
 					realName: [{

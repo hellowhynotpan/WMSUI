@@ -1,50 +1,64 @@
 <template>
 	<view>
 		<view class="wrap">
-			<view class="u-tabs-box">
-				<u-tabs-swiper activeColor="#f29100" ref="tabs" :list="list" :current="current" @change="change"
-					:is-scroll="false" swiperWidth="750"></u-tabs-swiper>
-			</view>
-			<swiper class="swiper-box" :current="swiperCurrent" @transition="transition"
-				@animationfinish="animationfinish">
+			<swiper class="swiper-box">
 				<swiper-item class="swiper-item">
-					<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom">
+					<view style="background-color: #FFFFFF;">
+						<u-search v-model="query.func" @change="getDataList" placeholder="请输入关键字" :show-action="true"
+							action-text="搜索" shape="square" search-icon-color="#0067be" color="#0067be" clearabled
+							style="padding:20rpx 20rpx 20rpx 20rpx;"></u-search>
+					</view>
+					<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom"
+						v-show="isNoData">
 						<view class="page-box">
-							<view class="order" v-for="(res, index) in orderList[0]" :key="res.id">
+							<view>
+								<view class="centre">
+									<image :src="getImgUrl('/img/icon/仓库点击.png')" mode="aspectFill"></image>
+									<view class="explain">
+										您还没有建立仓库
+										<view class="tips">可以去新建仓库</view>
+										<view class="btn" @click="openPage('add')">新建仓库</view>
+									</view>
+								</view>
+							</view>
+						</view>
+					</scroll-view>
+					<scroll-view scroll-y style="height: 100%;width: 100%;" @scrolltolower="reachBottom"
+						v-show="!isNoData">
+						<checkbox-group>
+							<view class="order" v-for="(res, index) in dataList" :key="res.id">
 								<view class="top">
 									<view class="left">
-										<u-icon name="home" :size="30" color="rgb(94,94,94)"></u-icon>
-										<view class="store">{{ res.wh_name }}</view>
-										<!-- <u-icon name="arrow-right" color="rgb(203,203,203)" :size="26"></u-icon> -->
+										<checkbox style="transform:scale(0.7)" />
+										<view class="store">{{ res.whName }}</view>
+										<u-icon name="arrow-right" color="rgb(203,203,203)" :size="26"
+											@click="editWh('editWh',res.id)"></u-icon>
 									</view>
-									<view class="right">编号：{{ res.wh_no }}</view>
+									<view class="right">编号：{{ res.whNo }}</view>
 								</view>
-								<view class="item">
+								<view class="item" @click="editWh('editWh',res.id)">
 									<view class="left">
-										<image :src="res.goodsUrl" mode="aspectFill"></image>
+										<image :src="getImgUrl('/img/icon/仓库点击.png')" mode="aspectFill">
+										</image>
 									</view>
 									<view class="content">
-										<view class="title u-line-2">{{ res.memo }}</view>
-										<view class="type">状态：{{ res.status }}</view>
+										<view class="title u-line-2">状态：{{ res.status==0?'正常':'作废' }}</view>
+										<view class="type">备注：{{ res.memo }}</view>
 									</view>
 									<view class="right">
 
 									</view>
 								</view>
-								<view class="bottom">
-									<!-- <view class="more">
-										<u-icon name="more-dot-fill" color="rgb(203,203,203)"></u-icon>
-									</view> -->
-									<view class="logistics btn">查看</view>
-									<view class="exchange btn">修改</view>
-									<view class="evaluate btn">删除</view>
-								</view>
 							</view>
 							<u-loadmore :status="loadStatus[0]" bgColor="#f2f2f2"></u-loadmore>
-						</view>
+							<view style="height: 200rpx;">
+
+							</view>
+						</checkbox-group>
 					</scroll-view>
 				</swiper-item>
 			</swiper>
+			<u-action-sheet :list="list"  @click="clickActionSheet" v-model="showActionSheet"></u-action-sheet>
 		</view>
 	</view>
 </template>
@@ -53,76 +67,104 @@
 	export default {
 		data() {
 			return {
-				orderList: [],
-				dataList: [{
-					id: 1,
-					wh_name: '原料仓',
-					wh_no: '1654165156',
-					goodsUrl: '//img13.360buyimg.com/n7/jfs/t1/103005/7/17719/314825/5e8c19faEb7eed50d/5b81ae4b2f7f3bb7.jpg',
-					memo: '备注',
-					status: '正常',
-				}],
 				list: [{
-						name: '仓库总览'
-					},
-					{
-						name: '新增仓库'
-					}
-				],
-				current: 0,
-				swiperCurrent: 0,
-				tabsHeight: 0,
-				dx: 0,
+					text: '新增'
+				}],
+				showActionSheet: false,
+				query: {
+					num: 4,
+					func: '',
+					createOwner: ''
+				},
+				dataList: [],
+				isNoData: false,
 				loadStatus: ['loadmore', 'loadmore', 'loadmore', 'loadmore'],
 			};
 		},
 		onLoad() {
-			this.getOrderList(4);
+			this.getDataList();
+		},
+		onShow() {
+			this.getDataList();
+		},
+		onNavigationBarButtonTap: function(e) {
+			this.showActionSheet = !this.showActionSheet
 		},
 		computed: {},
 		methods: {
+			getImgUrl(image) {
+				return this.baseUrl + image;
+			},
+			openPage(path) {
+				this.$u.route({
+					url: '/pages/A02basedataM/' + path
+				});
+			},
+			clickActionSheet()
+			{
+				this.$u.route({
+					url: '/pages/A02basedataM/add',
+					params: {
+						swiperCurrent: 0
+					}
+				});
+			},
+			editWh(path, Id) {
+				this.$u.route({
+					url: '/pages/A02basedataM/' + path,
+					params: {
+						id: Id
+					}
+				});
+			},
 			// 页面数据
-			getOrderList(idx) {
-				this.orderList.push(this.dataList);
+			async getDataList() {
+				this.query.createOwner = this.vuex_user.id + ''
+				await this.$u.api.queryWh(this.query)
+					.then(res => {
+						if (res.code == 200) {
+							this.dataList = res.data
+						} else {
+							this.$u.toast(res.msg);
+						}
+					})
+					.catch(err => {
+						this.$u.toast('出错，请稍后再试');
+					});
+				this.loadStatus.splice(0, 1, "loadmore")
+				this.dataList.length == 0 ? this.isNoData = true : this.isNoData = false
 			},
-			// tab栏切换
-			change(index) {
-				this.swiperCurrent = index;
-				this.getOrderList(index);
+			reachBottom() {
+				this.loadStatus.splice(this.current, 1, "loading")
+				setTimeout(() => {
+					this.query.num = this.query.num + 3
+					this.getDataList();
+				}, 1200);
 			},
-			transition({
-				detail: {
-					dx
-				}
-			}) {
-				this.$refs.tabs.setDx(dx);
-			},
-			animationfinish({
-				detail: {
-					current
-				}
-			}) {
-				this.$refs.tabs.setFinishCurrent(current);
-				this.swiperCurrent = current;
-				this.current = current;
-			}
 		}
 	};
 </script>
 
 <style>
-	/* #ifndef H5 */
 	page {
 		height: 100%;
 		background-color: #f2f2f2;
 	}
-
-	/* #endif */
 </style>
 
 <style lang="scss" scoped>
+	page {
+		background-color: #ededed;
+	}
+
+	.footer {
+		background-color: #fff;
+		line-height: 100rpx;
+		margin-bottom: 10rpx;
+	}
+
 	.order {
-		width: 710rpx;
+		width: 94%;
 		background-color: #ffffff;
 		margin: 20rpx auto;
 		border-radius: 20rpx;
@@ -140,13 +182,14 @@
 
 				.store {
 					margin: 0 10rpx;
-					font-size: 32rpx;
+					font-size: 30rpx;
 					font-weight: bold;
 				}
 			}
 
 			.right {
-				color: $u-type-warning-dark;
+				color: #0067be;
+				margin: auto 10rpx;
 			}
 		}
 
@@ -155,11 +198,13 @@
 			margin: 20rpx 0 0;
 
 			.left {
-				margin-right: 20rpx;
+				margin-right: 50rpx;
+				margin-left: 20rpx;
+				margin-bottom: 10rpx;
 
 				image {
-					width: 200rpx;
-					height: 200rpx;
+					width: 140rpx;
+					height: 140rpx;
 					border-radius: 10rpx;
 				}
 			}
@@ -214,7 +259,7 @@
 			margin-top: 40rpx;
 			padding: 0 10rpx;
 			justify-content: space-between;
-			align-items: center;
+			align-items: right;
 
 			.btn {
 				line-height: 52rpx;
@@ -227,8 +272,8 @@
 			}
 
 			.evaluate {
-				color: $u-type-warning-dark;
-				border-color: $u-type-warning-dark;
+				color: #0067be;
+				border-color: #0067be;
 			}
 		}
 	}
@@ -252,13 +297,13 @@
 		}
 
 		.btn {
-			margin: 80rpx auto;
+			margin: 20rpx auto;
 			width: 200rpx;
-			border-radius: 32rpx;
+			border-radius: 10rpx;
 			line-height: 64rpx;
 			color: #ffffff;
 			font-size: 26rpx;
-			background: linear-gradient(270deg, rgba(249, 116, 90, 1) 0%, rgba(255, 158, 1, 1) 100%);
+			background: linear-gradient(270deg, rgba(0, 103, 190, 1) 0%, rgba(0, 146, 190, 1.0) 100%);
 		}
 	}
 
@@ -274,6 +319,6 @@
 	}
 
 	.swiper-item {
-		height: 100%;
+		height: 70%;
 	}
 </style>

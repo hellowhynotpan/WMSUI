@@ -28,26 +28,7 @@
 					url: '/pages/A06account/' + path
 				});
 			},
-			logout() {
-				// 询问是否退出登录？
-				uni.showModal({
-					content: '是否要退出登录',
-					success: (res) => {
-						if (res.confirm) {
-							//清空缓存并跳转到登录页面
-							this.$u.vuex('vuex_user.logined', true);
-							this.$u.vuex('vuex_user.id', '');
-							this.$u.vuex('vuex_token', '');
-							this.$u.vuex('vuex_user.nickName', '');
-							this.$u.vuex('vuex_user.headIcon', '');
-							this.$u.vuex('vuex_user.realName', '');
-							uni.reLaunch({
-								url: '/pages/A06account/login/pwd-login'
-							})
-						}
-					}
-				})
-			}
+			
 		}
 	}
 </script>

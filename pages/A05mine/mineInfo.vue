@@ -2,7 +2,7 @@
 	<view >
 		<view class="u-m-t-20">
 			<u-cell-group>
-				<u-cell-item icon="account-fill" title="人脸信息修改" @click="openPage('faceInfo')"></u-cell-item>
+				<u-cell-item icon="account-fill" title="人脸信息新增/更新" @click="openPage('faceInfo')"></u-cell-item>
 			</u-cell-group>
 		</view>	
 	</view>

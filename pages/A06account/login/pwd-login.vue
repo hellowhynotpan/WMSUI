@@ -1,57 +1,47 @@
 <template>
 	<view>
-		<!-- <view class="page-header">
-			<view class="page-title">{{ title }}</view>
-		</view> -->
-		<view>
-			<image class="bg-set" src="../../../static/images/login/login.png">
-			</image>
-			<view class="form-box">
-				<u-form class="form" :model="model">
-					<u-form-item  prop="account">
-						<u-input v-model="model.account" placeholder="请输入手机号/邮箱/用户名" type="text" />
+		<view class="page-body" :style="{height:windowHeight}">
+			<view class="container-card">
+				<u-form :model="model" class="login-box">
+					<u-form-item prop="account" :border-bottom='false'>
+						<u-input class="login-input" v-model="model.account" left-icon="account"
+							placeholder="  请输入手机号/邮箱/用户名" />
 					</u-form-item>
-					<u-form-item  prop="password">
-						<u-input v-model="model.password" placeholder="请输入登录密码" type="password" />
+					<u-form-item prop="password" :border-bottom='false'>
+						<u-input class="login-input" v-model="model.password" placeholder="  请输入登录密码" type="password" />
 					</u-form-item>
-				    <u-button class="button-login"  ca :disabled="form.button.loading" type="primary" @click="submit">登 录</u-button>
+					<u-form-item :border-bottom='false'>
+						<u-button
+							style="background-color: #59a6ff;box-shadow: 0px 0px 12px 0px #ffffff !important;height:20%;width:100%;margin-top: 10rpx;"
+							class="button-login" ca :disabled="form.button.loading" type="primary" @click="submit">
+							登 录
+						</u-button>
+					</u-form-item>
 				</u-form>
-				
+				<view class="bottom-box">
+					<u-grid :col="4" :border="false">
+						<u-grid-item @click="recycler" style="background-color: rgba(0,0,0,0);padding-bottom:40rpx;">
+							<u-icon size="90" style="margin-top: 0;" :name="getImgUrl('/img/login/facelogin.png')">
+							</u-icon>
+							<view class="grid-text" style="font-size: 22rpx;color: rgba(255,255,255,0.4);">面容登录</view>
+						</u-grid-item>
+						<u-grid-item style="background-color: rgba(0,0,0,0);padding-top:40rpx;">
+							<u-icon size="90" :name="getImgUrl('/img/login/wechart.png')"></u-icon>
+							<view class="grid-text" style="font-size: 22rpx;color: rgba(255,255,255,0.4);">微信登录</view>
+						</u-grid-item>
+						<u-grid-item @click="openPage('login/sms-login')"
+							style="background-color: rgba(0,0,0,0);padding-bottom:40rpx;">
+							<u-icon size="90" :name="getImgUrl('/img/login/sms.png')"></u-icon>
+							<view class="grid-text" style="font-size: 22rpx;color: rgba(255,255,255,0.4);">短信登录</view>
+						</u-grid-item>
+						<u-grid-item @click="openPage('register/userName-register')"
+							style="background-color: rgba(0,0,0,0);padding-top:40rpx;">
+							<u-icon size="90" :name="getImgUrl('/img/login/register.png')"></u-icon>
+							<view class="grid-text" style="font-size: 22rpx;color: rgba(255,255,255,0.4);">立即注册</view>
+						</u-grid-item>
+					</u-grid>
+				</view>
 			</view>
-			<view class="bottom-box">
-				<view class="flex-item uni-bg-red" style="width: 25%;height:100%;float: left;">
-					<button class="bt4-style" @click="openPage('register/userName-register')"></button>
-				</view>
-				<view class="flex-item uni-bg-red" style="width: 25%;height:100%;float: left;">
-					<button class="bt2-style" @click="openPage('login/sms-login')"></button>
-				</view>
-				<view class="flex-item uni-bg-red" style="width: 25%;height:100%;float: left;">
-					<button class="bt3-style" @click="recycler"></button>
-				</view>
-				<view class="flex-item uni-bg-red" style="width: 25%;height:100%;float: left;">
-					<button class="bt1-style"></button>
-				</view>
-			</view>
-			<!-- 	<view class="form-box">
-				<u-form :model="model" ref="uForm" label-position="top">
-					<u-form-item class="form-item" label="账号" prop="account"><u-input v-model="model.account" placeholder="请输入手机号/邮箱/用户名" type="text" /></u-form-item>
-					<u-form-item class="form-item" label="密码" prop="password"><u-input v-model="model.password" placeholder="请输入登录密码" type="password" /></u-form-item>
-				</u-form>
-			
-				<u-gap height="40"></u-gap>
-			
-				<u-button :disabled="form.button.loading" type="primary" @click="submit">登 录</u-button>
-			
-				<u-gap height="40"></u-gap>
-			
-				<view class="u-flex">
-					<view class="u-flex-1 u-text-left" @click="openPage('login/sms-login')">短信登录</view>
-					<view class="u-flex-1 u-text-right" @click="openPage('register/userName-register')">注册</view>
-				</view>
-				<u-gap height="40"></u-gap>
-				<view class="u-text-center u-tips-color" @click="openPage('findPassword/findPassword')">登录遇到问题，忘记密码了？</view>
-			</view>
-			<u-gap height="60"></u-gap> -->
 		</view>
 	</view>
 </template>
@@ -60,10 +50,11 @@
 	export default {
 		data() {
 			return {
-				faceForm:{
-					image:'',
+				windowHeight: '600rpx',
+				faceForm: {
+					image: '',
 				},
-				imageURL: '/static/images/login/login.png',
+				imageURL: '/static/images/login/login.gif',
 				title: '账号密码登录',
 				desc: '',
 				form: {
@@ -107,12 +98,23 @@
 			};
 		},
 		created() {
-			this.checkRequestPermissions();
+			let self = this
+			uni.getSystemInfo({
+				success: function(res) {
+					self.windowHeight = res.screenHeight * (750 / res.windowWidth) + 'rpx';
+				}
+			})
+			this.windowHeight = self.windowHeight
 			this.initFace();
+			this.checkRequestPermissions()
+		},
+		onShow() {
+			this.checkRequestPermissions()
 		},
 		methods: {
 			//人脸登录
 			recycler() {
+				this.checkRequestPermissions();
 				const PPFace = uni.requireNativePlugin('PP-BaiduFaceV2');
 				PPFace.recycler({
 					isEnableSound: false //是否开启语音播报 默认 true
@@ -120,9 +122,8 @@
 					//res.code //返回编码 200 为成功
 					//res.base64Image //全景图像 可以加前缀 data:image/jpg;base64, 进行预览
 					//res.base64ImageCrop //裁剪后图像（少量黑边，或者没有） 可以加前缀 data:image/jpg;base64, 进行预览
-					if(res.code==200)
-					{
-						this.faceForm.image=res.base64ImageCrop
+					if (res.code == 200) {
+						this.faceForm.image = res.base64ImageCrop
 						this.$u.api.LoginByFace(this.faceForm)
 							.then(res => {
 								if (res.code == 200) {
@@ -135,9 +136,9 @@
 									this.$u.vuex('vuex_user.headIcon', res.data.headIcon);
 									this.$u.vuex('vuex_user.realName', res.data.realName);
 									console.log("跳转页面")
-									 uni.reLaunch({
-									 	url: '/pages/A01home/index',
-									 })
+									uni.reLaunch({
+										url: '/pages/A01home/index',
+									})
 								} else {
 									return this.$u.toast(res.msg);
 								}
@@ -145,8 +146,7 @@
 							.catch(err => {
 								return this.$u.toast('出错，请稍后再试');
 							});
-					}
-					else{
+					} else {
 						this.$u.toast('人脸采集失败');
 					}
 				})
@@ -155,10 +155,7 @@
 			checkRequestPermissions() {
 				const PPFace = uni.requireNativePlugin('PP-BaiduFaceV2');
 				PPFace.checkRequestPermissions(res => {
-					if(res.code==200)
-					{
-					}
-					else{
+					if (res.code == 200) {} else {
 						this.$u.toast('获取摄像头权限失败');
 					}
 				})
@@ -173,10 +170,7 @@
 					iosLicenseId: 'xxx-face-ios', //*需要修改 ios百度申请到的liceenseid
 				}, res => {
 					//res.code //返回编码 200 为成功
-					if(res.code==200)
-					{
-					}
-					else{
+					if (res.code == 200) {} else {
 						this.$u.toast('初始化失败');
 					}
 				})
@@ -185,6 +179,9 @@
 				this.$u.route({
 					url: '/pages/A06account/' + path
 				});
+			},
+			getImgUrl(image) {
+				return this.baseUrl + image;
 			},
 			submit() {
 				this.form.button.loading = true;
@@ -213,94 +210,49 @@
 					});
 			}
 		},
-		onReady() {
-			// this.$refs.uForm.setRules(this.rules);
-		}
 	};
 </script>
 
 <style lang="scss" scoped>
 	@import '../scss/account.scss';
 
-	.bg-set {
-		position: fixed;
+	.page-body {
+		background-image: url(../../../static/images/login/login.gif);
+		background-size: 100% 100%;
+		background-repeat: no-repeat;
 		width: 100%;
-		height: 100%;
-		top: 0;
-		left: 0;
 	}
 
-	.form-box {
+	.container-card {
 		position: fixed;
-		top: 46%;
-		left: 4%;
-		right: 4%;
+		top: 45%;
+		left: 8%;
+		right: 8%;
 		bottom: 25%;
-		background-image: url(../../../static/images/login/formBox.png);
-		background-size: 100% 100%;
-		.form {
-			margin: 40rpx 20rpx 20rpx 20rpx;
-		}
+		background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.4));
+		border-radius: 18rpx;
+	}
+
+	.login-box {
+		margin-top: 10%;
+		height: 78%;
+		width: 80%;
+		margin-left: 10%;
+		margin-right: 10%;
+	}
+
+	.login-input {
+		border: 3rpx, solid;
+		background-color: #FFFFFF;
+		height: 10%;
+		border-radius: 10rpx;
 	}
 
 	.bottom-box {
 		position: fixed;
-		top: 77%;
-		left: 1%;
-		right: 1%;
-		bottom: 12%;
-
-		button::after {
-			border: none
-		}
-	}
-
-	.bt1-style {
-		background-repeat: no-repeat;
-		background-image: url(../../../static/images/login/wechart.png);
-		width: 100%;
-		height: 100%;
-		background-color: transparent;
-		background-size: 100% 100%;
-		border-style: none;
-		margin: 0rpx;
-		border: 0rpx;
-	}
-
-	.bt2-style {
-		background-repeat: no-repeat;
-		background-image: url(../../../static/images/login/sms.png);
-		width: 100%;
-		height: 100%;
-		background-color: transparent;
-		background-size: 100% 100%;
-		border-style: none;
-		margin: 0rpx;
-	}
-
-	.bt3-style {
-		background-repeat: no-repeat;
-		background-image: url(../../../static/images/login/facelogin.png);
-		width: 100%;
-		height: 100%;
-		background-color: transparent;
-		background-size: 100% 100%;
-		border-style: none;
-		margin: 0rpx;
-	}
-
-	.bt4-style {
-		background-repeat: no-repeat;
-		background-image: url(../../../static/images/login/register.png);
-		width: 100%;
-		height: 100%;
-		background-color: transparent;
-		background-size: 100% 100%;
-		border-style: none;
-		border: 0rpx;
-		margin: 0rpx;
-	}
-	.button-login{
-		margin-top: 36rpx;
+		top: 78%;
+		left: 12%;
+		right: 12%;
+		height: 180rpx;
 	}
 </style>

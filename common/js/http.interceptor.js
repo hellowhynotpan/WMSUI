@@ -6,11 +6,10 @@
 const install = (Vue, vm) => {
 	// 此为自定义配置参数，具体参数见上方说明
 	Vue.prototype.$u.http.setConfig({
-		baseUrl: 'http://47.103.96.47:8081/api',
-		//baseUrl: 'http://localhost:13631/api',
-		//baseUrl: 'http://192.168.0.136:8000/api',
+		baseUrl: vm.baseUrl,
 		loadingText: '努力加载中~',
 		loadingTime: 800,
+		originalData:true,
 		// 设置自定义头部content-type
 		// header: {
 		// 	'content-type': 'xxx'
@@ -46,12 +45,12 @@ const install = (Vue, vm) => {
 	}
 	// 响应拦截，如配置，每次请求结束都会执行本方法
 		Vue.prototype.$u.http.interceptor.response = (res) => {
-			if(res.code == 200) {
+			if(res.statusCode == 200) {
 				// res为服务端返回值，可能有code，result等字段
 				// 这里对res.result进行返回，将会在this.$u.post(url).then(res => {})的then回调中的res的到
 				// 如果配置了originalData为true，请留意这里的返回值
-				return res;
-			} if(res.code == 401) {
+				return res.data;
+			} if(res.statusCode == 401) {
 				// 假设201为token失效，这里跳转登录
 				vm.$u.toast('验证失败，请重新登录');
 				setTimeout(() => {
@@ -61,7 +60,7 @@ const install = (Vue, vm) => {
 				return false;
 			} 
 			else{
-				return res;
+				return res.data;
 			}
 		}
 }

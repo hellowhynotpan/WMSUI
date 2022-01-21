@@ -6,39 +6,25 @@
 				<view slot="body">
 					<u-grid :col="3" :border="false">
 						<u-grid-item @click="openPage('whInfo')">
-							<u-icon name="photo" :size="66"></u-icon>
+							<u-icon size="66" :name="getImgUrl('/img/icon/仓库点击.png')"></u-icon>
 							<view class="grid-text">仓库信息</view>
 						</u-grid-item>
-							
-						<u-grid-item>
-							<u-icon name="photo" :size="66"></u-icon>
+						<u-grid-item @click="openPage('csInfo')">
+							<u-icon size="66"  :name="getImgUrl('/img/icon/储位点击.png')"></u-icon>
 							<view class="grid-text">储位信息</view>
 						</u-grid-item>
-						<u-grid-item>
-							<u-icon name="photo" :size="66"></u-icon>
+						<u-grid-item @click="openPage('partInfo')">
+							<u-icon size="66"  :name="getImgUrl('/img/icon/物料点击.png')"></u-icon>
 							<view class="grid-text">物料信息</view>
 						</u-grid-item>
 						<u-grid-item>
-							<u-icon name="photo" :size="66"></u-icon>
-							<view class="grid-text">图片</view>
-						</u-grid-item>
-						<u-grid-item>
-							<u-icon name="photo" :size="66"></u-icon>
-							<view class="grid-text">图片</view>
-						</u-grid-item>
-						<u-grid-item>
-							<u-icon name="photo" :size="66"></u-icon>
-							<view class="grid-text">图片</view>
-						</u-grid-item>
-						<u-grid-item>
-							<u-icon name="photo" :size="66"></u-icon>
-							<view class="grid-text">图片</view>
+							<u-icon size="66"  :name="getImgUrl('/img/icon/入库单点击.png')"></u-icon>
+							<view class="grid-text">入库信息</view>
 						</u-grid-item>
 					</u-grid>
 				</view>
 			</u-card>
-		</view>
-	</view>
+		</view>	</view>
 </template>
 
 <script>
@@ -54,6 +40,8 @@
 				this.$u.route({
 					url: '/pages/A02basedataM/' + path
 				});
+			},getImgUrl(image) {
+				return this.baseUrl +image;
 			},
 		}
 	}
@@ -72,5 +60,8 @@
 		-moz-opacity: 0.8;
 		opacity: 0.85;
 		box-shadow: 0px 0px 3px 0px #000000 !important;
+	}
+	.swiper-box {
+		flex: 1;
 	}
 </style>

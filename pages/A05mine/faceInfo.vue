@@ -89,6 +89,11 @@
 						this.$u.api.AddUserFace(this.faceForm)
 							.then(resp => {
 								if (resp.code == 200) {
+									this.$u.toast("采集成功");
+									setTimeout(() => {
+										uni.navigateBack({
+										});
+									}, 1000);
 								} else {
 									return this.$u.toast(resp.msg);
 								}
